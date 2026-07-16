@@ -3,7 +3,7 @@ name: Build & Release APK
 on:
   push:
     tags:
-      - 'v*' # سيتم تشغيل السكربت عند رفع تاغ يبدأ بحرف v مثل v1.0
+      - 'v*'
 
 jobs:
   build:
@@ -25,21 +25,20 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Release APK
+      - name: Prepare Build Environment
         run: |
-          echo "AI_API_KEY=${{ secrets.AI_API_KEY || 'dummy_key' }}" > local.properties
+          echo "AI_API_KEY=${{ secrets.AI_API_KEY || 'dummy' }}" > local.properties
           mkdir -p app/
           echo '{"project_info":{"project_number":"0","project_id":"dummy"},"client":[{"client_info":{"mobilesdk_app_id":"0","android_client_info":{"package_name":"com.empire.myapplication"}},"api_key":[{"current_key":"dummy"}]}]}' > app/google-services.json
-          ./gradlew assembleRelease --stacktrace
 
-      - name: List Files (Debug)
-        run: ls -R app/build/outputs/apk/
+      - name: Build with Gradle
+        run: ./gradlew assembleRelease --stacktrace
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: |
-            app/build/outputs/apk/release/*.apk
+          files: app/build/outputs/apk/release/*.apk
           generate_release_notes: true
           draft: false
           prerelease: false
