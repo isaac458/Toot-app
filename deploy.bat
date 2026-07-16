@@ -1,6 +1,6 @@
 @echo off
 set /p msg="Enter what is new in this version: "
-set /p tag="Enter version tag (e.g. v1.1): "
+set /p tag="Enter version tag (e.g. v3.1): "
 
 echo.
 echo [1/4] Adding files...
@@ -17,5 +17,8 @@ git tag %tag%
 git push origin %tag%
 
 echo.
-echo Done! Now go to GitHub -> Actions to see your APK being built.
+echo Done! Opening GitHub Actions to track your build...
+start https://github.com/isaac458/Toot-app/actions
+echo.
+echo Wait 3-5 minutes, then check the Releases page.
 pause
