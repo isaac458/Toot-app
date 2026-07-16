@@ -10,7 +10,7 @@ jobs:
     name: Build Release APK
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: write # هذا السطر ضروري جداً للسماح برفع الـ APK
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -27,20 +27,17 @@ jobs:
 
       - name: Prepare Build Environment
         run: |
-          echo "AI_API_KEY=${{ secrets.AI_API_KEY || 'dummy' }}" > local.properties
+          echo "AI_API_KEY=dummy" > local.properties
           mkdir -p app/
           echo '{"project_info":{"project_number":"0","project_id":"dummy"},"client":[{"client_info":{"mobilesdk_app_id":"0","android_client_info":{"package_name":"com.empire.myapplication"}},"api_key":[{"current_key":"dummy"}]}]}' > app/google-services.json
 
       - name: Build with Gradle
         run: ./gradlew assembleRelease --stacktrace
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v2
-        if: startsWith(github.ref, 'refs/tags/')
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v1
         with:
           files: app/build/outputs/apk/release/*.apk
           generate_release_notes: true
-          draft: false
-          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
