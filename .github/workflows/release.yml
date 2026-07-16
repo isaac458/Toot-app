@@ -10,7 +10,7 @@ jobs:
     name: Build Release APK
     runs-on: ubuntu-latest
     permissions:
-      contents: write # هذا السطر ضروري جداً للسماح برفع الـ APK
+      contents: write
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Prepare Build Environment
+      - name: Prepare Dummy Files
         run: |
           echo "AI_API_KEY=dummy" > local.properties
           mkdir -p app/
@@ -34,10 +34,17 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew assembleRelease --stacktrace
 
-      - name: Upload APK to Release
-        uses: softprops/action-gh-release@v1
+      - name: List Output (Debug)
+        run: find app/build/outputs/apk/ -name "*.apk"
+
+      - name: Create Release and Upload APK
+        uses: softprops/action-gh-release@v2
         with:
-          files: app/build/outputs/apk/release/*.apk
+          files: |
+            app/build/outputs/apk/release/*.apk
+            app/build/outputs/apk/debug/*.apk
           generate_release_notes: true
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
