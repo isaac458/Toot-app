@@ -1,4 +1,5 @@
 @echo off
+set JAVA_HOME=D:\AndroidStudio_Install\jbr
 echo [1/5] Cleaning old builds...
 call gradlew clean
 
