@@ -1,5 +1,7 @@
 package com.empire.myapplication
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.compose.runtime.collectAsState
@@ -23,6 +25,8 @@ import androidx.lifecycle.lifecycleScope
 import com.empire.myapplication.ui.theme.MyApplicationTheme
 import com.empire.myapplication.ui.chat.ChatScreen
 import com.empire.myapplication.data.repository.AiRepository
+import com.empire.myapplication.ui.navigation.AppNavigation
+import com.empire.myapplication.core.utils.ThemeManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,7 +35,7 @@ class MainActivity : ComponentActivity() {
     private val updateViewModel: UpdateViewModel by viewModels()
 
     @javax.inject.Inject
-    lateinit var themeManager: com.empire.myapplication.core.utils.ThemeManager
+    lateinit var themeManager: ThemeManager
 
     @javax.inject.Inject
     lateinit var aiRepository: AiRepository
@@ -64,12 +68,15 @@ class MainActivity : ComponentActivity() {
             val updateState by updateViewModel.updateState.collectAsState()
 
             MyApplicationTheme {
-                com.empire.myapplication.ui.navigation.AppNavigation(startDestination)
+                AppNavigation(startDestination)
                 
                 // عرض نافذة التحديث
                 UpdateDialog(
                     state = updateState,
-                    onDownloadClick = { url -> updateViewModel.startDownload(url) },
+                    onDownloadClick = { url ->
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                        startActivity(intent)
+                    },
                     onDismiss = { updateViewModel.resetState() },
                     onInstallStarted = { updateViewModel.resetState() }
                 )
