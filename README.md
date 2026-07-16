@@ -1,21 +1,32 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Toot (توت) - AI Assistant Application 🚀
 
-# Run and deploy your AI Studio app
+تطبيق "توت" هو مساعد ذكاء اصطناعي ذكي وودود، مصمم ليكون رفيقك الرقمي بلمسة شخصية. التطبيق مبني باستخدام تقنيات Gemini ومطور بواسطة **إسحاق**.
 
-This contains everything you need to run your app locally.
+## 🌟 المميزات
+- **شخصية فريدة:** "توت" تتميز بأسلوب حوار لطيف وودود.
+- **تحديثات تلقائية:** التطبيق يقوم بفحص التحديثات الجديدة تلقائياً من GitHub.
+- **أتمتة كاملة:** مدمج مع GitHub Actions لبناء ملفات APK تلقائياً عند كل إصدار جديد.
 
-View your app in AI Studio: https://ai.studio/apps/890b205e-b6e3-4437-9782-eca601740f39
+## 🛠️ للمطورين (طريقة العمل)
 
-## Run Locally
+لقد قمنا بإعداد نظام أتمتة كامل لتسهيل عملية التحديث:
 
-**Prerequisites:**  [Android Studio](https://developer.android.com/studio)
+### 1. الرفع والتحديث (Local Deployment)
+بدلاً من استخدام أوامر Git المعقدة، استخدم سكريبت الأتمتة:
+- قم بتشغيل ملف `deploy.bat`.
+- أدخل وصف التعديلات (What's new).
+- أدخل رقم الإصدار (مثل `v1.1`).
+- السكريبت سيقوم برفع الكود وإرسال التاج (Tag) إلى GitHub تلقائياً.
 
+### 2. البناء التلقائي (GitHub Actions)
+بمجرد رفع التاج الجديد:
+- يقوم GitHub Actions ببناء التطبيق (Assemble Release).
+- يتم إنشاء "Release" جديد في صفحة المستودع.
+- يتم رفع ملف الـ APK جاهزاً للتحميل.
 
-1. Open Android Studio
-2. Select **Open** and choose the directory containing this project
-3. Allow Android Studio to fix any incompatibilities as it imports the project.
-4. Create a file named `.env` in the project directory and set `GEMINI_API_KEY` in that file to your Gemini API key (see `.env.example` for an example)
-5. Remove this line from the app's `build.gradle.kts` file: `signingConfig = signingConfigs.getByName("debugConfig")`
-6. Run the app on an emulator or physical device
+## 📲 تحميل التطبيق
+يمكنك دائماً الحصول على أحدث نسخة من ملف الـ APK من خلال صفحة الـ [Releases](https://github.com/isaac458/Toot-app/releases).
+
+---
+**تطوير:** [Isaac458](https://github.com/isaac458)
+**الذكاء الاصطناعي:** مدمج مع Google Gemini API
