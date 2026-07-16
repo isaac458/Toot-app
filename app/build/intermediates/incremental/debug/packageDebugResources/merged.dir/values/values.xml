@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="white">#FFFFFFFF</color>
+    <string name="app_name">عين الأمان</string>
+    <string name="confirm_button">بدء الاستخدام</string>
+    <string name="default_web_client_id" translatable="false">764601305581-sh36efhgg918hagaqbi113h1q78p0l9r.apps.googleusercontent.com</string>
+    <string name="explanation_desc">هذا التطبيق مصمم خصيصاً لتسجيل عن بعد. سيقوم التطبيق بتسجيل مقاطع فيديو بجودة عالية وإرسالها إليك تلقائياً. نطلب منك منح الأذونات اللازمة لضمان عمل الخدمة واستقرارها.</string>
+    <string name="explanation_title">مرحباً بك في عين الأمان</string>
+    <string name="gcm_defaultSenderId" translatable="false">764601305581</string>
+    <string name="google_api_key" translatable="false">AIzaSyAgzatnkJ2jLDRKsXdKqvuvV0ZXHIPC5KE</string>
+    <string name="google_app_id" translatable="false">1:764601305581:android:88652998d125e4c817ffe4</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAgzatnkJ2jLDRKsXdKqvuvV0ZXHIPC5KE</string>
+    <string name="google_storage_bucket" translatable="false">tot-ai-628b7.firebasestorage.app</string>
+    <string name="header_title">اسحاق للمساعدة (:</string>
+    <string name="project_id" translatable="false">tot-ai-628b7</string>
+    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>
